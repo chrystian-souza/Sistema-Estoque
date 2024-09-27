@@ -3,8 +3,7 @@ from django.utils import timezone
 
 class Roupa(models.Model):
     nome = models.CharField(max_length=100)
-    tamanho = models.CheckConstraint
-    numero = models.IntegerField()
+    tamanho = models.CharField(max_length=100)
     preco = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
