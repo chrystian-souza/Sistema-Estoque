@@ -51,11 +51,15 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'estoque_roupas.urls'
+import os
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent  # Certifique-se de que isso está correto
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # Adicione o caminho para templates
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
