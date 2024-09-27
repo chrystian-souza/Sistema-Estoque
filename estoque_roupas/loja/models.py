@@ -7,7 +7,7 @@ class Roupa(models.Model):
     preco = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
-        return f'{self.nome} (Tamanho: {self.numero})'
+        return f'{self.nome} (Tamanho: {self.tamanho})'
 
 class MovimentacaoEstoque(models.Model):
     TIPO_MOVIMENTACAO = [
