@@ -46,6 +46,7 @@ def listar_clientes(request):
     clientes = Cliente.objects.all()
     return render(request, 'loja/listar_clientes.html', {'clientes': clientes})
 
+
 # Adicionar cliente
 def adicionar_cliente(request):
     if request.method == 'POST':
