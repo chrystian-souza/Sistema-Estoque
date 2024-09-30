@@ -19,9 +19,18 @@ class ClienteForm(forms.ModelForm):
 class PagamentoForm(forms.ModelForm):
     class Meta:
         model = Pagamento
-        fields = ['cliente', 'valor', 'descricao']
+        fields = ['cliente', 'valor_pago', 'descricao']
 
 class DebitoForm(forms.ModelForm):
     class Meta:
         model = Debito
-        fields = ['cliente', 'valor', 'descricao']
+        fields = ['pedido','valor_total','valor_pago','numero_parcelas', 'parcelas_pagas', 'descricao']  
+
+
+class PagamentoForm(forms.ModelForm):
+    class Meta:
+        model = Pagamento
+        fields = ['cliente', 'valor_pago', 'descricao']  # Use 'valor_pago' se for o nome correto no modelo
+
+        
+

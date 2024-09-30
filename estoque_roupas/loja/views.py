@@ -104,3 +104,59 @@ def registrar_debito(request):
     else:
         form = DebitoForm()
     return render(request, 'loja/registrar_debito.html', {'form': form})
+
+
+
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import Pedido, Debito, Pagamento
+from .forms import PagamentoForm
+
+def listar_pedidos(request):
+    pedidos = Pedido.objects.all()
+    return render(request, 'loja/listar_pedidos.html', {'pedidos': pedidos})
+
+def detalhes_pedido(request, pedido_id):
+    pedido = get_object_or_404(Pedido, id=pedido_id)
+    return render(request, 'loja/detalhes_pedido.html', {'pedido': pedido})
+
+def listar_debitos(request):
+    debitos = Debito.objects.all()
+    return render(request, 'loja/listar_debitos.html', {'debitos': debitos})
+
+def detalhes_debito(request, debito_id):
+    debito = get_object_or_404(Debito, id=debito_id)
+    return render(request, 'loja/detalhes_debito.html', {'debito': debito})
+
+def adicionar_pagamento(request, debito_id):
+    debito = get_object_or_404(Debito, id=debito_id)
+    if request.method == 'POST':
+        form = PagamentoForm(request.POST)
+        if form.is_valid():
+            pagamento = form.save(commit=False)
+            pagamento.debito = debito
+            pagamento.save()
+            debito.valor_pago += pagamento.valor_pago
+            debito.parcelas_pagas += 1
+            debito.save()
+            return redirect('detalhes_debito', debito_id=debito.id)
+    else:
+        form = PagamentoForm()
+    return render(request, 'loja/adicionar_pagamento.html', {'form': form, 'debito': debito})
+
+def listar_pagamentos(request, debito_id):
+    debito = get_object_or_404(Debito, id=debito_id)
+    pagamentos = Pagamento.objects.filter(debito=debito)
+    return render(request, 'loja/listar_pagamentos.html', {'pagamentos': pagamentos, 'debito': debito})
+
+
+
+def adicionar_pedido(request):
+    if request.method == 'POST':
+        form = PedidoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('listar_pedidos')  # Redirecione para uma lista de pedidos, ou outro local
+    else:
+        form = PedidoForm()
+    
+    return render(request, 'loja/adicionar_pedido.html', {'form': form})

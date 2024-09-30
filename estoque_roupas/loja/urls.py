@@ -12,4 +12,11 @@ urlpatterns = [
     path('clientes/excluir/<int:pk>/', views.excluir_cliente, name='excluir_cliente'),
     path('pagamentos/registrar/', views.registrar_pagamento, name='registrar_pagamento'),
     path('debitos/registrar/', views.registrar_debito, name='registrar_debito'),
+    path('pedidos/', views.listar_pedidos, name='listar_pedidos'),
+    path('pedido/<int:pedido_id>/', views.detalhes_pedido, name='detalhes_pedido'),
+    path('pedido/adicionar/', views.adicionar_pedido, name='adicionar_pedido'),
+    path('debitos/', views.listar_debitos, name='listar_debitos'),
+    path('debito/<int:debito_id>/', views.detalhes_debito, name='detalhes_debito'),
+    path('debito/<int:debito_id>/pagamento/', views.adicionar_pagamento, name='adicionar_pagamento'),
+    path('debito/<int:debito_id>/pagamentos/', views.listar_pagamentos, name='listar_pagamentos'),
 ]

@@ -1,0 +1,15 @@
+{% extends 'loja/base.html' %}
+
+{% block title %}Adicionar Pagamento{% endblock %}
+
+{% block content %}
+    <h1>Adicionar Pagamento para o Débito #{{ debito.id }}</h1>
+    
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Registrar Pagamento</button>
+    </form>
+
+    <a href="{% url 'detalhes_debito' debito.id %}" class="btn btn-secondary">Voltar</a>
+{% endblock %}

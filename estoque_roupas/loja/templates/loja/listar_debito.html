@@ -1,0 +1,39 @@
+{% extends 'loja/base.html' %}
+
+{% block title %}Débitos{% endblock %}
+
+{% block content %}
+    <h1>Débitos</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID do Débito</th>
+                <th>Cliente</th>
+                <th>Pedido</th>
+                <th>Valor Total</th>
+                <th>Valor Pago</th>
+                <th>Parcelas Pagas</th>
+                <th>Total de Parcelas</th>
+                <th>Saldo Restante</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for debito in debitos %}
+            <tr>
+                <td>{{ debito.id }}</td>
+                <td>{{ debito.cliente.nome }}</td>
+                <td>{{ debito.pedido.id }}</td>
+                <td>R$ {{ debito.valor_total }}</td>
+                <td>R$ {{ debito.valor_pago }}</td>
+                <td>{{ debito.parcelas_pagas }}</td>
+                <td>{{ debito.numero_parcelas }}</td>
+                <td>R$ {{ debito.saldo_restante }}</td>
+                <td>
+                    <a href="{% url 'detalhes_debito' debito.id %}" class="btn btn-info">Ver Detalhes</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
