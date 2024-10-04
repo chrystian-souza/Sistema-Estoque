@@ -1,76 +1,26 @@
-<!-- templates/base.html -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Sistema de Estoque{% endblock %}</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            padding-top: 70px; /* Espaço para a navbar fixa */
-        }
-        .navbar-brand {
-            color: #FFB6C1 !important; /* Cor do título da navbar */
-        }
-        .nav-link {
-            color: white; /* Cor dos links */
-        }
-        .nav-link:hover {
-            color: #FFB6C1; /* Cor dos links ao passar o mouse */
-        }
-    </style>
-</head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <div class="container-fluid">
-            <span class="navbar-brand" style="font-size: 24px; font-weight: bold;">
-                Sistema de Estoque - Hg Fashion Store
-            </span>
-            
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'home' %}">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'adicionar_roupa' %}">Adicionar Roupa</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'movimentar_estoque' %}">Movimentar Estoque</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-   
-    <div class="container mt-5">
-        <h1>Estoque de Roupas</h1>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">Roupa</th>
-                    <th scope="col">Quantidade em Estoque</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for item in roupas %}
-                <tr>
-                    <td>{{ item.roupa.nome }}</td>
-                    <td>{{ item.quantidade_atual }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        <a href="{% url 'adicionar_roupa' %}" class="btn btn-primary">Adicionar Roupa</a>
-        <a href="{% url 'movimentar_estoque' %}" class="btn btn-secondary">Movimentar Estoque</a>
-    </div>
+<!-- templates/home.html -->
+{% extends 'loja/base.html' %}
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+{% block title %}Estoque de Roupas{% endblock %}
+
+{% block content %}
+    <h1>Estoque de Roupas</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Roupa</th>
+                <th scope="col">Quantidade em Estoque</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in roupas %}
+            <tr>
+                <td>{{ item.roupa.nome }}</td>
+                <td>{{ item.quantidade_atual }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'adicionar_roupa' %}" class="btn btn-primary">Adicionar Roupa</a>
+    <a href="{% url 'movimentar_estoque' %}" class="btn btn-secondary">Movimentar Estoque</a>
+{% endblock %}
