@@ -1,6 +1,19 @@
 from django.db import models
 from django.utils import timezone
 
+
+
+class Cliente(models.Model):
+    nome = models.CharField(max_length=100)
+    email = models.EmailField(unique=True)
+    telefone = models.CharField(max_length=15, blank=True, null=True)
+    endereco = models.TextField(blank=True, null=True)
+    data_cadastro = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.nome
+   
+
 class Roupa(models.Model):
     nome = models.CharField(max_length=100)
     tamanho = models.CharField(max_length=100)
@@ -29,19 +42,7 @@ class EstoqueAtual(models.Model):
 
     def __str__(self):
         return f'Estoque de {self.roupa.nome}: {self.quantidade_atual}'
-
-
-class Cliente(models.Model):
-    nome = models.CharField(max_length=100)
-    email = models.EmailField(unique=True, null=True, blank=True)
-    telefone = models.CharField(max_length=15, null=True, blank=True)
-
-    def __str__(self):
-        return self.nome
-
-
-    def __str__(self):
-        return f"Pagamento de {self.valor} por {self.cliente.nome}"
+    
 
 class Debito(models.Model):
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE, related_name='debitos')
@@ -113,3 +114,7 @@ class Pagamento(models.Model):
 
     def __str__(self):
         return f"Pagamento de {self.valor_pago} para {self.cliente.nome}"
+    
+
+
+    

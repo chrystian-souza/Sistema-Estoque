@@ -160,3 +160,13 @@ def adicionar_pedido(request):
         form = PedidoForm()
     
     return render(request, 'loja/adicionar_pedido.html', {'form': form})
+
+def cadastrar_cliente(request):
+    if request.method == 'POST':
+        form = ClienteForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('listar_clientes')  # Redireciona para a página de listagem de clientes após o cadastro
+    else:
+        form = ClienteForm()
+    return render(request, 'cadastrar_cliente.html', {'form': form})
