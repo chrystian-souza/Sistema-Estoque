@@ -36,11 +36,11 @@ class PagamentoForm(forms.ModelForm):
 class ClienteForm(forms.ModelForm):
     class Meta:
         model = Cliente
-        fields = ['nome', 'email', 'telefone', 'endereco']
+        fields = ['nome', 'email', 'telefone',]
         widgets = {
             'nome': forms.TextInput(attrs={'class': 'form-control'}),
             'email': forms.EmailInput(attrs={'class': 'form-control'}),
             'telefone': forms.TextInput(attrs={'class': 'form-control'}),
-            'endereco': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
+          
         }
 
