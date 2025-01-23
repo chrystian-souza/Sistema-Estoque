@@ -1,12 +1,22 @@
 {% extends 'loja/base.html' %}
 
-{% block title %}{% endblock %}
+
 
 
 {% block content %}
 
 
-
+<div class="container mt-5">
+    <div class="container ms-auto">
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Cadastrar Cliente</button>
+    </form>
+    <a href="{% url 'listar_clientes' %}" class="btn btn-secondary mt-3">Voltar</a>
+    </div>
+    
+</div>
 
 
 

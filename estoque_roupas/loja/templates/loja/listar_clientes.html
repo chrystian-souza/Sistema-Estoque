@@ -9,6 +9,7 @@
             <tr>
                 <th scope="col">Nome</th>
                 <th scope="col">Email</th>
+                <th scope="col">Telefone</th>
                 <th scope="col">Ações</th>
             </tr>
         </thead>
@@ -17,6 +18,7 @@
             <tr>
                 <td>{{ cliente.nome }}</td>
                 <td>{{ cliente.email }}</td>
+                <td>{{ cliente.telefone }}</td>
                 <td>
                     <a href="{% url 'editar_cliente' cliente.pk %}" class="btn btn-warning">Editar</a>
                     <a href="{% url 'excluir_cliente' cliente.pk %}" class="btn btn-danger">Excluir</a>
