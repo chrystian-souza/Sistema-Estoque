@@ -56,7 +56,7 @@ def adicionar_cliente(request):
             return redirect('listar_clientes')
     else:
         form = ClienteForm()
-    return render(request, 'loja/adicionar_cliente.html', {'form': form})
+    return render(request, 'loja/adicionar_clientes.html', {'form': form})
 
 # Editar cliente
 def editar_cliente(request, pk):
