@@ -1,4 +1,5 @@
-
+import os
+from pathlib import Path
 
 """
 Django settings for estoque_roupas project.
@@ -53,8 +54,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'estoque_roupas.urls'
-import os
-from pathlib import Path
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent  # Certifique-se de que isso está correto
 
