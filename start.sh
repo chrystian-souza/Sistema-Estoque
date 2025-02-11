@@ -1,4 +1,4 @@
-source /SISTEMA-ESTOQUE/venv/Scripts/activate
+source ./venv/Scripts/activate
 
 # Rodar as migrações e iniciar o servidor
 python manage.py migrate
