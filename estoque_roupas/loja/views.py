@@ -73,10 +73,16 @@ def editar_cliente(request, pk):
 # Excluir cliente
 def excluir_cliente(request, pk):
     cliente = get_object_or_404(Cliente, pk=pk)
+
     if request.method == 'POST':
         cliente.delete()
         return redirect('listar_clientes')
-    return render(request, 'loja/excluir_cliente.html', {'cliente': cliente})
+
+    return render(
+        request,
+        'loja/excluir_cliente.html',
+        {'cliente': cliente}
+    )
 
 # Estoque Atual
 def estoque_atual(request):
