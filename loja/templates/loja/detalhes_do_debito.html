@@ -1,0 +1,33 @@
+{% extends 'loja/base.html' %}
+
+{% block title %}Detalhes do Débito{% endblock %}
+
+{% block content %}
+    <h1>Detalhes do Débito #{{ debito.id }}</h1>
+    <p><strong>Cliente:</strong> {{ debito.cliente.nome }}</p>
+    <p><strong>Pedido:</strong> {{ debito.pedido.id }}</p>
+    <p><strong>Valor Total:</strong> R$ {{ debito.valor_total }}</p>
+    <p><strong>Valor Pago:</strong> R$ {{ debito.valor_pago }}</p>
+    <p><strong>Saldo Restante:</strong> R$ {{ debito.saldo_restante }}</p>
+    <p><strong>Parcelas Pagas:</strong> {{ debito.parcelas_pagas }} / {{ debito.numero_parcelas }}</p>
+
+    <h2>Pagamentos</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Data do Pagamento</th>
+                <th>Valor Pago</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pagamento in debito.pagamento_set.all %}
+            <tr>
+                <td>{{ pagamento.data_pagamento }}</td>
+                <td>R$ {{ pagamento.valor_pago }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{% url 'adicionar_pagamento' debito.id %}" class="btn btn-success">Adicionar Pagamento</a>
+{% endblock %}
