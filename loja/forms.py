@@ -16,10 +16,6 @@ class ClienteForm(forms.ModelForm):
         model = Cliente
         fields = ['nome', 'email', 'telefone']
 
-class PagamentoForm(forms.ModelForm):
-    class Meta:
-        model = Pagamento
-        fields = ['cliente', 'valor_pago', 'descricao']
 
 class DebitoForm(forms.ModelForm):
     class Meta:

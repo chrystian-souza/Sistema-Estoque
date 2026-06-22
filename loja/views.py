@@ -176,3 +176,35 @@ def cadastrar_cliente(request):
     else:
         form = ClienteForm()
     return render(request, 'cadastrar_cliente.html', {'form': form})
+
+
+
+def criar_pagamento(request, venda_id):
+    venda = get_object_or_404(Venda, id=venda_id)
+
+    if request.method == 'POST':
+        form = PagamentoForm(request.POST)
+
+        if form.is_valid():
+            pagamento = form.save(commit=False)
+
+            pagamento.venda = venda
+            pagamento.save()
+
+            # ATUALIZAR VALOR PAGO
+            venda.valor_pago += pagamento.valor
+
+            # ATUALIZAR SALDO
+            venda.saldo_devedor = venda.valor_total - venda.valor_pago
+
+            venda.save()
+
+            return redirect('detalhe_venda', venda_id=venda.id)
+
+    else:
+        form = PagamentoForm()
+
+    return render(request, 'loja/criar_pagamento.html', {
+        'form': form,
+        'venda': venda
+    })
