@@ -1,0 +1,26 @@
+<!-- templates/home.html -->
+{% extends 'loja/base.html' %}
+
+{% block title %}Estoque de Roupas{% endblock %}
+
+{% block content %}
+    <h1>Estoque de Roupas</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Roupa</th>
+                <th scope="col">Quantidade em Estoque</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in roupas %}
+            <tr>
+                <td>{{ item.roupa.nome }}</td>
+                <td>{{ item.quantidade_atual }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'adicionar_roupa' %}" class="btn btn-primary">Adicionar Roupa</a>
+    <a href="{% url 'movimentar_estoque' %}" class="btn btn-warning">Movimentar Estoque</a>
+{% endblock %}

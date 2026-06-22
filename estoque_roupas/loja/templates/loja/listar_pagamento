@@ -1,0 +1,27 @@
+{% extends 'loja/base.html' %}
+
+{% block title %}Pagamentos{% endblock %}
+
+{% block content %}
+    <h1>Pagamentos do Débito #{{ debito.id }}</h1>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Data do Pagamento</th>
+                <th>Valor Pago</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pagamento in pagamentos %}
+            <tr>
+                <td>{{ pagamento.data_pagamento }}</td>
+                <td>R$ {{ pagamento.valor_pago }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{% url 'adicionar_pagamento' debito.id %}" class="btn btn-success">Adicionar Pagamento</a>
+    <a href="{% url 'detalhes_debito' debito.id %}" class="btn btn-secondary">Voltar</a>
+{% endblock %}
