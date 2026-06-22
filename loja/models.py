@@ -33,7 +33,7 @@ class MovimentacaoEstoque(models.Model):
     data = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return f'{self.tipo.capitalize()} de {self.quantidade} {self.roupa.nome}'
+        return f'{self.tipo} de {self.quantidade} {self.roupa.nome}'
     
 class EstoqueAtual(models.Model):
     roupa = models.OneToOneField(Roupa, on_delete=models.CASCADE)
@@ -104,16 +104,57 @@ class Debito(models.Model):
 
 
 
-class Pagamento(models.Model):
+# class Pagamento(models.Model):
+#     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+#     pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE)  # Se houver um pedido vinculado
+#     valor_pago = models.DecimalField(max_digits=10, decimal_places=2)
+#     data_pagamento = models.DateField(auto_now_add=True)
+#     descricao = models.CharField(max_length=255, blank=True, null=True)
+
+#     def __str__(self):
+#         return f"Pagamento de {self.valor_pago} para {self.cliente.nome}"
+    
+
+
+class Venda(models.Model):
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
-    pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE)  # Se houver um pedido vinculado
-    valor_pago = models.DecimalField(max_digits=10, decimal_places=2)
-    data_pagamento = models.DateField(auto_now_add=True)
-    descricao = models.CharField(max_length=255, blank=True, null=True)
+    data = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
-        return f"Pagamento de {self.valor_pago} para {self.cliente.nome}"
-    
+    valor_total = models.DecimalField(max_digits=10, decimal_places=2)
+
+    valor_pago = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+
+    saldo_devedor = models.DecimalField(max_digits=10, decimal_places=2)
+
+    FORMA = [
+        ('dinheiro','Dinheiro'),
+        ('pix','Pix'),
+        ('cartao','Cartão'),
+        ('fiado','Fiado')
+    ]
+
+    forma_pagamento = models.CharField(max_length=20, choices=FORMA)
 
 
-    
+class ItemVenda(models.Model):
+
+    venda = models.ForeignKey(Venda,on_delete=models.CASCADE)
+
+    roupa = models.ForeignKey(Roupa,on_delete=models.CASCADE)
+
+    quantidade = models.PositiveIntegerField()
+
+    preco_unitario = models.DecimalField(max_digits=10,decimal_places=2)
+
+    subtotal = models.DecimalField(max_digits=10,decimal_places=2) 
+
+
+class Pagamento(models.Model):
+
+    venda = models.ForeignKey(Venda,on_delete=models.CASCADE)
+
+    valor = models.DecimalField(max_digits=10,decimal_places=2)
+
+    data = models.DateTimeField(auto_now_add=True)
+
+    forma = models.CharField(max_length=20)

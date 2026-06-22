@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Roupa, EstoqueAtual, MovimentacaoEstoque, Cliente, Pagamento, Debito
-from .forms import RoupaForm, MovimentacaoForm, ClienteForm, PagamentoForm, DebitoForm
+from .models import Roupa, EstoqueAtual, MovimentacaoEstoque, Cliente, Pagamento, Debito, Pagamento
+from .forms import RoupaForm, MovimentacaoForm, ClienteForm, PagamentoForm, DebitoForm, Pagamento
 
 
 # Home
@@ -58,7 +58,7 @@ def adicionar_cliente(request):
         form = ClienteForm()
     return render(request, 'loja/adicionar_clientes.html', {'form': form})
 
-# Editar cliente
+#Editar cliente
 def editar_cliente(request, pk):
     cliente = get_object_or_404(Cliente, pk=pk)
     if request.method == 'POST':
@@ -70,7 +70,7 @@ def editar_cliente(request, pk):
         form = ClienteForm(instance=cliente)
     return render(request, 'loja/editar_cliente.html', {'form': form})
 
-# Excluir cliente
+#Excluir cliente
 def excluir_cliente(request, pk):
     cliente = get_object_or_404(Cliente, pk=pk)
 

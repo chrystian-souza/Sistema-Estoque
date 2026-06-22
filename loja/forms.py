@@ -30,7 +30,7 @@ class DebitoForm(forms.ModelForm):
 class PagamentoForm(forms.ModelForm):
     class Meta:
         model = Pagamento
-        fields = ['cliente', 'valor_pago', 'descricao']  # Use 'valor_pago' se for o nome correto no modelo
+        fields = ['venda', 'valor', 'forma'] # Use 'valor_pago' se for o nome correto no modelo
 
         
 class ClienteForm(forms.ModelForm):
